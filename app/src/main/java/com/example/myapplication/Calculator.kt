@@ -13,7 +13,7 @@ object Calculator {
             points in 61..70 -> "3.5"
             points in 71..80 -> "4.0"
             points in 81..90 -> "4.5"
-            true -> "5.0"
+            points >= 91 -> "5.0"
             else -> "Błąd danych"
         }
     }
