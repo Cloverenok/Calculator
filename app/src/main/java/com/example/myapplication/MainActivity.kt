@@ -18,17 +18,26 @@ class MainActivity : AppCompatActivity() {
         val tvResult = findViewById<TextView>(R.id.tvResult)
 
         btnCalculate.setOnClickListener {
-            val studentName = etNameStudent.text.toString()
-            val points: Int? = etPoints.text.toString().toIntOrNull()
+            val studentName = etNameStudent.text.toString().trim()
+            if (studentName.isEmpty()) {
+                etNameStudent.error = "Wprowadź imię i nazwisko"
+                return@setOnClickListener
+            }
 
-            val student = Student(studentName,  points)
+            val pointsRaw = etPoints.text.toString().trim()
+            if (pointsRaw.isEmpty()) {
+                etPoints.error = "Wprowadź liczbę punktów"
+                return@setOnClickListener
+            }
 
+            val points = pointsRaw.toIntOrNull()
+            val student = Student(studentName, points)
             val grade = Calculator.calculatePoints(student.points)
 
             val summary = """
-                Student: ${student.studentName}
-                Punkty: ${student.points ?: "brak"}
-                Ocena: $grade
+        Student: ${student.studentName}
+        Punkty: ${student.points ?: "brak"}
+        Ocena: $grade
             """.trimIndent()
 
             tvResult.text = summary

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
-class Student(
+data class Student(
     val studentName: String,
-    val points: Int?)
+    val points: Int?
+)
